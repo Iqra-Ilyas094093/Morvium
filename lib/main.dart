@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wallpaper_app/view_model/wallpaper_view_model.dart';
-import 'package:wallpaper_app/views/Screens/Nav_Screen.dart';
+import 'package:wallpaper_app/Views/Screens/NavigationScreen.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-      create: (_)=>WallpaperViewModel(),
-      child: const MyApp()));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -21,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
       ),
-      home: const NavScreen(),
+      home: const Navigationscreen(),
     );
   }
 }
