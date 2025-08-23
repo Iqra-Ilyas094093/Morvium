@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallpaper_app/Views/Screens/homeScreen.dart';
+import 'package:wallpaper_app/Views/Screens/searchScreen.dart';
 import 'package:wallpaper_app/utils/consts.dart';
 
 class Navigationscreen extends StatefulWidget {
@@ -12,19 +13,11 @@ class Navigationscreen extends StatefulWidget {
 class _NavigationscreenState extends State<Navigationscreen> {
   List<Widget> screens = [
     Homescreen(),
-    Center(child: Text('search'),),
-    Center(child: Text('Add'),),
+    Searchscreen(),
     Center(child: Text('notifications'),),
     Center(child: Text('profile'),),
   ];
   int selectedIndex =0;
- final List<IconData> icons = [
-   Icons.home,
-   Icons.home,
-   Icons.home,
-   Icons.home,
-   Icons.home,
- ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +27,7 @@ class _NavigationscreenState extends State<Navigationscreen> {
         backgroundColor: AppColors.greyColor,
         iconSize: 30,
         type: BottomNavigationBarType.fixed,
-        currentIndex: selectedIndex,
+        currentIndex: selectedIndex>=2?selectedIndex+1:selectedIndex,
           selectedItemColor: AppColors.whiteColor,
           unselectedItemColor: AppColors.whiteColor,
           showUnselectedLabels: false,
@@ -42,9 +35,15 @@ class _NavigationscreenState extends State<Navigationscreen> {
           unselectedFontSize: 0,
           showSelectedLabels: false,
           onTap: (index){
+          if(index == 2){
+
+          }
+          else{
             setState(() {
-              selectedIndex = index;
+              selectedIndex = selectedIndex<2?index:index -1;
             });
+          }
+
           },
           items: [
         BottomNavigationBarItem(icon: selectedIndex == 0?Icon(Icons.home):Icon(Icons.home_outlined),label: 'home'),
