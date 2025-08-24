@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wallpaper_app/Views/Screens/homeScreen.dart';
 import 'package:wallpaper_app/Views/Screens/searchScreen.dart';
+import 'package:wallpaper_app/Views/widgets/upload_sheet.dart';
 import 'package:wallpaper_app/utils/consts.dart';
 
 class Navigationscreen extends StatefulWidget {
@@ -14,8 +15,8 @@ class _NavigationscreenState extends State<Navigationscreen> {
   List<Widget> screens = [
     Homescreen(),
     Searchscreen(),
-    Center(child: Text('notifications'),),
-    Center(child: Text('profile'),),
+    Center(child: Text('notifications',style: TextStyle(color: AppColors.whiteColor),),),
+    Center(child: Text('profile',style: TextStyle(color: AppColors.whiteColor)),),
   ];
   int selectedIndex =0;
   @override
@@ -36,7 +37,7 @@ class _NavigationscreenState extends State<Navigationscreen> {
           showSelectedLabels: false,
           onTap: (index){
           if(index == 2){
-
+            uploadSheet(context);
           }
           else{
             setState(() {
@@ -49,8 +50,8 @@ class _NavigationscreenState extends State<Navigationscreen> {
         BottomNavigationBarItem(icon: selectedIndex == 0?Icon(Icons.home):Icon(Icons.home_outlined),label: 'home'),
         BottomNavigationBarItem(icon: selectedIndex == 1?Icon(Icons.search):Icon(Icons.search_outlined),label: 'home'),
         BottomNavigationBarItem(icon: Icon(Icons.add),label: 'home'),
-        BottomNavigationBarItem(icon: selectedIndex == 3?Icon(Icons.notifications):Icon(Icons.notifications_none),label: 'home'),
-        BottomNavigationBarItem(icon: selectedIndex == 4?Icon(Icons.person):Icon(Icons.person_outline),label: 'home'),
+        BottomNavigationBarItem(icon: selectedIndex == 2?Icon(Icons.notifications):Icon(Icons.notifications_none),label: 'home'),
+        BottomNavigationBarItem(icon: selectedIndex == 3?Icon(Icons.person):Icon(Icons.person_outline),label: 'home'),
       ])
     );
 
