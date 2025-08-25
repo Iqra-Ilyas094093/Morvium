@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wallpaper_app/Views/Screens/homeScreen.dart';
+import 'package:wallpaper_app/Views/Screens/in_box_screen.dart';
+import 'package:wallpaper_app/Views/Screens/profileScreen.dart';
 import 'package:wallpaper_app/Views/Screens/searchScreen.dart';
 import 'package:wallpaper_app/Views/widgets/upload_sheet.dart';
 import 'package:wallpaper_app/utils/consts.dart';
@@ -15,8 +17,8 @@ class _NavigationscreenState extends State<Navigationscreen> {
   List<Widget> screens = [
     Homescreen(),
     Searchscreen(),
-    Center(child: Text('notifications',style: TextStyle(color: AppColors.whiteColor),),),
-    Center(child: Text('profile',style: TextStyle(color: AppColors.whiteColor)),),
+    InBoxScreen(),
+    Profilescreen(),
   ];
   int selectedIndex =0;
   @override
@@ -28,7 +30,7 @@ class _NavigationscreenState extends State<Navigationscreen> {
         backgroundColor: AppColors.greyColor,
         iconSize: 30,
         type: BottomNavigationBarType.fixed,
-        currentIndex: selectedIndex>=2?selectedIndex+1:selectedIndex,
+        currentIndex: selectedIndex<2?selectedIndex:selectedIndex +1,
           selectedItemColor: AppColors.whiteColor,
           unselectedItemColor: AppColors.whiteColor,
           showUnselectedLabels: false,
@@ -41,7 +43,7 @@ class _NavigationscreenState extends State<Navigationscreen> {
           }
           else{
             setState(() {
-              selectedIndex = selectedIndex<2?index:index -1;
+              selectedIndex = index<2?index:index -1;
             });
           }
 

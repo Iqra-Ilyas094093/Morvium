@@ -8,7 +8,7 @@ class Images {
   final String url;
   final String photographer;
   final String photographer_url;
-  final String photographer_id;
+  final int photographer_id;
   final String avg_color;
   final Src src;
   final bool liked;
@@ -33,7 +33,7 @@ class Images {
   height=0,
   url = '',
   photographer = '',
-  photographer_id = '',
+  photographer_id = 0,
   photographer_url = '',
   avg_color = '',
   src = Src.empty(),

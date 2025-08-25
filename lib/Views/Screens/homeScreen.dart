@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wallpaper_app/Views/widgets/masonaryGridView.dart';
+import 'package:wallpaper_app/services/api_services.dart';
 import 'package:wallpaper_app/utils/consts.dart';
+
+import '../../model/imageModel/image_model.dart';
+import 'no_connection_screen.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -11,6 +16,8 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
+  ApiServices repo = ApiServices();
+  late Future<List<Images>> imageList;
   int selectedIndex = 0;
   ScrollController scrollController = ScrollController();
   final List<String> categories = [
@@ -20,6 +27,21 @@ class _HomescreenState extends State<Homescreen> {
     'Gaming',
     'Friendships',
   ];
+  int pageNumber = 1;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    imageList = repo.getImageList(pageNumber);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    scrollController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +65,9 @@ class _HomescreenState extends State<Homescreen> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
+                              imageList = repo.getImagesBySearch(
+                                categories[index],
+                              );
                               selectedIndex = index;
                             });
                           },
@@ -67,25 +92,7 @@ class _HomescreenState extends State<Homescreen> {
                 },
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: MasonryGridView.builder(
-                itemCount: 40,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                controller: scrollController,
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                ),
-                itemBuilder: (context, index) {
-                  return Container(
-                      height: 300,
-                      child: Image.network('https://static.vecteezy.com/system/resources/thumbnails/056/860/972/small/young-woman-smiling-in-a-city-at-night-photo.jpg',fit: BoxFit.cover,),);
-                },
-              ),
-            ),
+            Masonarygridview(imageList: imageList),
           ],
         ),
       ),
